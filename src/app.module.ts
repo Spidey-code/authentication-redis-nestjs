@@ -3,13 +3,13 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { redisStore } from 'cache-manager-redis-yet';
 // import { ClientOpts } from 'redis';
 import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     AuthModule,
-    MongooseModule.forRoot(
-      'mongodb+srv://rajul:83lDka3VoQHpNzTl@redisotp.tubjznt.mongodb.net/Authentication',
-    ),
+    MongooseModule.forRoot(`${process.env.DB_URL}`),
     CacheModule.register({
       host: 'localhost', //default host
       store: redisStore,
