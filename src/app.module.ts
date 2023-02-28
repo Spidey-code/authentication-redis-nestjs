@@ -11,9 +11,9 @@ import { ConfigModule } from '@nestjs/config';
     AuthModule,
     MongooseModule.forRoot(`${process.env.DB_URL}`),
     CacheModule.register({
-      host: 'localhost', //default host
+      host: `${process.env.REDIS_HOST}`,
       store: redisStore,
-      port: 6379, //default port,
+      port: `${process.env.REDIS_PORT}`,
       isGlobal: true,
     }),
   ],
